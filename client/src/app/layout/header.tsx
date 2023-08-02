@@ -30,6 +30,7 @@ interface Props {
     onDarkMode: () => void
 }
 
+//Contains all the elements located on the App Bar fixed on top of the web page.
 export default function Header({ darkMode, onDarkMode }: Props) {
     return (
         <AppBar position="static" sx={{ mb: 4 }}>
