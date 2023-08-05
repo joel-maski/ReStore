@@ -12,7 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //To connect to Sqlite Database
-builder.Services.AddDbContext<StoreContext>(opt => {
+builder.Services.AddDbContext<StoreContext>(opt =>
+{
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
@@ -22,6 +23,9 @@ builder.Services.AddCors();
 //builder.Services.AddDbContext<StoreContext>(opt => {
 //    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerDefaultConnection"));
 //});
+
+
+
 
 var app = builder.Build();
 
@@ -34,8 +38,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(opt => {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
 });
 
 app.UseAuthorization();
@@ -48,8 +53,8 @@ var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
 try
 {
-    context.Database.Migrate();
-    DbInitializer.Initialze(context);    
+    // context.Database.Migrate();
+    // DbInitializer.Initialze(context);
 }
 catch (Exception ex)
 {
