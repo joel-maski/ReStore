@@ -1,7 +1,7 @@
 import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import { useStoreContext } from "../context/StoreContext";
+import { useAppSelector } from "../store/configureStore";
 
 const midLinks = [
     { title: 'catalog', path: '/catalog' },
@@ -33,11 +33,11 @@ interface Props {
 
 //Contains all the elements located on the App Bar fixed on top of the web page.
 export default function Header({ darkMode, onDarkMode }: Props) {
-    const { basket } = useStoreContext();
+    const { basket } = useAppSelector(s => s.basket);
 
-    //reduce is a javascript function to iterate through array and return output.
-    //sum will contain the final output
-    //item will contain each item object in an array
+    //'reduce' is javascript function to iterate through array, add logic and return output.
+    //'sum' will contain the final output
+    //'item' will contain each item object in an array
     //below example loops through array and counting the quantity per item
     const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
     const drawerWidth = 240;

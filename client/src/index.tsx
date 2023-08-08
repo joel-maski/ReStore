@@ -1,3 +1,6 @@
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
@@ -8,16 +11,21 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/router';
-import { StoreProvider } from './app/context/StoreContext';
+import { Provider } from 'react-redux';
+import { store } from './app/store/configureStore';
+import { IntlProvider } from 'react-intl'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <StoreProvider>
-      <RouterProvider router={router} />
-    </StoreProvider>
+    <Provider store={store}>
+      <IntlProvider locale="ar" defaultLocale="ar">
+        <RouterProvider router={router} />
+      </IntlProvider>
+    </Provider>
   </React.StrictMode>
 );
 
