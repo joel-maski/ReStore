@@ -26,7 +26,7 @@ export default function SideBar() {
             anchor="left"
         >
             <Toolbar />
-            <Divider />
+           
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem key={text} disablePadding>
@@ -39,7 +39,7 @@ export default function SideBar() {
                     </ListItem>
                 ))}
             </List>
-            <Divider />
+        
             <List>
                 {['All mail', 'Trash', 'Spam'].map((text, index) => (
                     <ListItem key={text} disablePadding>
