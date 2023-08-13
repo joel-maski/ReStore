@@ -2,6 +2,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { useAppSelector } from "../store/configureStore";
+import SignedInMenu from "./SignedInMenu";
 
 const midLinks = [
     { title: 'catalog', path: '/catalog' },
@@ -34,6 +35,7 @@ interface Props {
 //Contains all the elements located on the App Bar fixed on top of the web page.
 export default function Header({ darkMode, onDarkMode }: Props) {
     const { basket } = useAppSelector(s => s.basket);
+    const { user } = useAppSelector(s => s.account);
 
     //'reduce' is javascript function to iterate through array, add logic and return output.
     //'sum' will contain the final output
@@ -74,20 +76,26 @@ export default function Header({ darkMode, onDarkMode }: Props) {
                             <ShoppingCart></ShoppingCart>
                         </Badge>
                     </IconButton>
-
-                    <List sx={{ display: 'flex' }}>
-                        {rightLinks.map(({ title, path }) => (
-                            <ListItem
-                                component={NavLink}
-                                to={path}
-                                key={path}
-                                sx={navStyles}>
-                                {title.toUpperCase()}
-                            </ListItem>
-                        ))}
-                    </List>
+                    {
+                        user ? (
+                            <SignedInMenu />
+                        )
+                            :
+                            (
+                                <List sx={{ display: 'flex' }}>
+                                    {rightLinks.map(({ title, path }) => (
+                                        <ListItem
+                                            component={NavLink}
+                                            to={path}
+                                            key={path}
+                                            sx={navStyles}>
+                                            {title.toUpperCase()}
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            )
+                    }
                 </Box>
-
             </Toolbar>
         </AppBar>
     )
